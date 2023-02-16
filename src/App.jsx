@@ -44,6 +44,16 @@ class App extends Component {
     this.setState({ name: "", number: "" });
   };
 
+  handleDelete = (index) => {
+    this.setState((prevState) => {
+      const newArray = prevState.contacts;
+      newArray.splice(index, 1);
+      return {
+        contacts: [...newArray],
+      };
+    });
+  };
+
   render() {
     return (
       <>
@@ -63,11 +73,15 @@ class App extends Component {
               onChange={this.hanleInput}
             />
             {this.state.filter === "" ? (
-              <Contacts contacts={this.state.contacts} />
+              <Contacts
+                contacts={this.state.contacts}
+                handleDelete={this.handleDelete}
+              />
             ) : (
               <FilteredContacts
                 contacts={this.state.contacts}
                 filter={this.state.filter}
+                handleDelete={this.handleDelete}
               />
             )}
           </>
