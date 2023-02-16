@@ -24,6 +24,13 @@ class App extends Component {
 
   hadleSubmit = (e) => {
     e.preventDefault();
+    if (
+      this.state.contacts.find(
+        (contact) => contact.name === e.target.name.value
+      )
+    ) {
+      return alert(e.target.name.value + " is already in contacts");
+    }
     this.setState((prevState) => {
       const newContact = { name: prevState.name, number: prevState.number };
       return {
