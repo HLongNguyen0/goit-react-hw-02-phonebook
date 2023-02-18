@@ -18,6 +18,20 @@ class App extends Component {
     number: "",
   };
 
+  componentDidMount() {
+    const data = JSON.parse(localStorage.getItem("contacts"));
+    if (data) {
+      this.setState({ contacts: data });
+    }
+    console.log(data);
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.contacts !== prevState.contacts) {
+      localStorage.setItem("contacts", JSON.stringify(this.state.contacts));
+    }
+  }
+
   hanleInput = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
